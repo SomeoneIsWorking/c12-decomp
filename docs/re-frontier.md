@@ -291,6 +291,10 @@ lines are psx-c12's (`game/...`) or psxport's (`runtime/...`); the port consumes
   (camera + 0x80), each object's MATRIX (+0x14) and each skeleton's animation clocks (joint + 4); a replay of it at
   t = 1 links the real frame's table word for word (1,575 of 1,575 frames). See `docs/frame-loop.md`.
 - where: psx-c12 `game/replay/`
-- gap: the title's own cut declarations (scripted camera switches with the same source, in-level teleports) are not
-  read; an animation clock that wraps or changes track steps.
+- gap: cuts are not read. Candidates: a change of the rig's controller (`g_CameraRig` +4, see `docs/frame-loop.md`),
+  and the dropship record's shot changes (0x800472B4 snaps every tick, so its writer is the declaration). In-level
+  teleports are not read either. An animation clock that wraps or changes track steps.
+- notes: `Gfx_SwapAndSubmit` links each camera's two DR_ENV packets (camera + 0x30 + parity * 0x1C, and + 0xC)
+  into the last slot of its build table before `DrawOTag`, unless camera + 8 bit 0 is set; the parity word is
+  gp+0xCB8. In cutscenes they carry the letterbox draw area and offset, so a replay links them too.
 - notes: `Game_Draw` also moves objects (`Obj_UpdateAll`), which the replay's sandbox undoes.

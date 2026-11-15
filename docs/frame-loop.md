@@ -44,3 +44,19 @@ frame above bit 12, a 12-bit fraction below. With a fraction it interpolates the
 (0x800BBB9C) and writes the local rotation (0x800BBA8C). `Skeleton_Compose` then makes each joint's world MATRIX from
 its parent's (the object's, or joint `*(track + 6)`) and its local. Both run inside `Game_Draw`, so the clock is the
 pose's input; the player's clock (0x801DD634 in the first mission) advances by about 0x1587 a tick.
+
+## Camera rig and controllers
+
+The main camera reads its view from a rig record, `g_CameraRig` (0x800F0924, cleared by `Camera_InitRigs` 0x800165FC):
+the camera +0, the controller that wrote it this tick +4, and the MATRIX the camera's +0x80 points at, +0xC, with its
+translation at +0x20. A controller is a `Camera` object (`Camera_Create` 0x800166C8, 0x1E0 bytes, the rig at +0x40,
+the followed object at +0x44, update +8 `Camera_Update` 0x80018374, attributes +0x64). `Camera_Update` runs only
+while attribute bit 0 is set, stamps itself into the rig's +4, and moves the rig's translation half the way to its
+target each tick. `Camera_FindActive` (0x80016F98) finds the controller of a rig on `g_DrawTasks`.
+
+`Camera_SetAttributes` (0x800167D4) either eases to the new attributes (control bits 0x180000 at +0x18, 30 ticks
+through 0x800191A8) or calls `Camera_Snap` (0x80016BB4), which through 0x80016C24 writes the target straight into the
+rig and requests an orientation snap (+0x18 bit 0x8000). The player camera snaps when a level starts
+(0x8001A87C). The dropship sequence's driver (0x800472B4) snaps its controller every tick it finds bit 0x100000 set
+in its record (gp+0xA70, +0x54), to the record's position (+0x66/+0x6A/+0x6E), so a shot change inside that
+sequence goes through the same snap as its motion. Which code sets that record's shot is not yet read.
