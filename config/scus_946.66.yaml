@@ -1,0 +1,39 @@
+name: SCUS_946.66
+sha1: e6d3d1a9eb47ff188271b4875dd0a06cbe07687c
+options:
+  basename: scus_946.66
+  target_path: disc/SCUS_946.66
+  base_path: ..
+  platform: psx
+  compiler: PSYQ
+  asm_path: asm/scus_946.66
+  src_path: src/scus_946.66
+  asset_path: assets/scus_946.66
+  build_path: build
+  ld_script_path: build/scus_946.66.ld
+  find_file_boundaries: False
+  gp_value: 0x800EFC10
+  o_as_suffix: True
+  use_legacy_include_asm: False
+  section_order: [".rodata", ".text", ".data", ".bss"]
+  symbol_addrs_path:
+    - config/symbols/scus_946.66.txt
+  undefined_funcs_auto_path: build/scus_946.66.undefined_funcs_auto.txt
+  undefined_syms_auto_path: build/scus_946.66.undefined_syms_auto.txt
+  subalign: 2
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: header
+    type: header
+    start: 0x0
+  - name: scus_946.66
+    type: code
+    start: 0x800
+    vram: 0x80010000
+    subsegments:
+      - [0x800, asm]
+      - [0xAD694, data]
+  - [0xE1000]

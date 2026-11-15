@@ -1,0 +1,63 @@
+// scus_946.66: names from our own RE (psx-c12 game/facts/title_facts.h and docs/re-frontier.md); gp is 0x800EFC10.
+
+// libetc, libcd, libgte
+VSync = 0x800A1758; // type:func
+SquareRoot0 = 0x800A1E8C; // type:func
+VectorNormal = 0x800A1F10; // type:func
+MulMatrix = 0x800A355C; // type:func
+ScaleMatrix = 0x800A527C; // type:func
+GetRotMatrix = 0x800AF1C4; // type:func
+CdReadySync = 0x800ABD98; // type:func
+CdRead = 0x800AF9D4; // type:func
+CdReadSync = 0x800AFB70; // type:func
+CD_cw = 0x800B4CA8; // type:func
+Vs_count = 0x800EEB98;
+CD_cbsync = 0x800EEEB8;
+CD_cbready = 0x800EEEBC;
+CD_lastpos = 0x800EEED0;
+CD_lastmode = 0x800EEED4;
+
+// Frame loop and loading
+Game_FrameLoop = 0x80038094; // type:func
+Module_OpenGtLvb = 0x80059108; // type:func
+Cd_CommandStatusCallback = 0x80057F7C; // type:func
+Cd_Load = 0x800ABCE4; // type:func
+PitchAngle = 0x800A4634; // type:func
+
+// World view, cells and terrain
+View_BuildFrustumCorners = 0x800660D8; // type:func
+World_DrawMeshPass = 0x8006769C; // type:func
+World_CollectVisibleCells = 0x800684C0; // type:func
+World_RasterizeFootprintEdge = 0x80069500; // type:func
+g_Camera = 0x800F05F4;
+g_WorldLevel = 0x800F06B8;
+g_WorldAttributeTable = 0x800F08E0;
+g_GroundBand = 0x800F0828;
+g_GroundPlaneLow = 0x800F0830;
+g_GroundPlaneHigh = 0x800F0834;
+g_GroundDistanceLimit = 0x800F0838;
+g_FogBias = 0x800F1588;
+g_WorldHeader = 0x800F91E4;
+g_ZoneProjectionPlane = 0x800F921E;
+g_ZoneProjectionDistance = 0x800F921C;
+g_ZoneFrustumReach = 0x800F9220;
+g_FogNear = 0x800F9234;
+g_FogFar = 0x800F9238;
+g_FogStart = 0x800F923C;
+g_FogEnd = 0x800F9240;
+g_FrustumCorners = 0x800F9378;
+g_VisibleCells = 0x800F9AA4;
+g_WorldShadeTables = 0x800F9E00;
+g_WorldPassSave = 0x800F9E10;
+g_FootprintFirstColumn = 0x800F9E34;
+g_FootprintLastColumn = 0x800F9EB4;
+g_CellTestScaleMatrix = 0x801030B0;
+QuadMidpointPairs = 0x800D8728;
+TriMidpointPairs = 0x800D875A;
+QuadCoarseSlots = 0x800D8774;
+QuadFineSlots = 0x800D87E0;
+TriCoarseSlots = 0x800D890C;
+TriFineSlots = 0x800D8954;
+LevelTable = 0x800D1F78;
+MwdFileTable = 0x800D0030;
+Module_Relocate = 0x800615F4; // type:func
