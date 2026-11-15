@@ -61,3 +61,24 @@ TriFineSlots = 0x800D8954;
 LevelTable = 0x800D1F78;
 MwdFileTable = 0x800D0030;
 Module_Relocate = 0x800615F4; // type:func
+
+// Gameplay frame: draw section, cameras, objects and skeletons (docs/frame-loop.md)
+Game_Draw = 0x80038440; // type:func
+Task_RunAll = 0x80038D28; // type:func
+Gfx_SwapAndSubmit = 0x800A0B80; // type:func
+Gfx_DrawSync = 0x8009E52C; // type:func
+Camera_DrawLists = 0x8009C830; // type:func
+Camera_BuildMatrices = 0x8009CB34; // type:func
+Obj_UpdateAll = 0x8002F324; // type:func
+Obj_DrawAll = 0x8002F63C; // type:func
+Obj_UpdateKind = 0x80029964; // type:func
+Obj_FollowMove = 0x800339A4; // type:func
+Skeleton_Translate = 0x8002950C; // type:func
+Skeleton_Compose = 0x800A3780; // type:func
+Model_Draw = 0x800A39C8; // type:func
+Anim_SampleList = 0x800BBDFC; // type:func
+Anim_Sample = 0x800BBE78; // type:func
+g_GameMode = 0x800F1B4C;
+g_DrawTasks = 0x800F154C;
+g_ObjectListEnd = 0x800F10FC;
+g_ObjectList = 0x800F1100;

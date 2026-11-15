@@ -280,3 +280,17 @@ lines are psx-c12's (`game/...`) or psxport's (`runtime/...`); the port consumes
 - gap: past about 300 percent the first mission's street shows no more geometry (the level ends); depth is a
   16-bit z, so very large increases saturate; the guest packet pool is fixed, so dense scenes drop the farthest
   cells first; object and actor culling is not scaled.
+
+## Presentation (main executable, image `c12`)
+
+### present.draw-section — The gameplay draw section and its moving inputs
+
+- status: crossed 2026-11-15
+- deps: runtime.gameplay
+- evidence: `Game_Draw` (0x80038440) rebuilds the main camera's ordering table from the camera's source MATRIX
+  (camera + 0x80), each object's MATRIX (+0x14) and each skeleton's animation clocks (joint + 4); a replay of it at
+  t = 1 links the real frame's table word for word (1,575 of 1,575 frames). See `docs/frame-loop.md`.
+- where: psx-c12 `game/replay/`
+- gap: the title's own cut declarations (scripted camera switches with the same source, in-level teleports) are not
+  read; an animation clock that wraps or changes track steps.
+- notes: `Game_Draw` also moves objects (`Obj_UpdateAll`), which the replay's sandbox undoes.
