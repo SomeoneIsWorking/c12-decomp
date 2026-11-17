@@ -298,3 +298,24 @@ lines are psx-c12's (`game/...`) or psxport's (`runtime/...`); the port consumes
   into the last slot of its build table before `DrawOTag`, unless camera + 8 bit 0 is set; the parity word is
   gp+0xCB8. In cutscenes they carry the letterbox draw area and offset, so a replay links them too.
 - notes: `Game_Draw` also moves objects (`Obj_UpdateAll`), which the replay's sandbox undoes.
+
+### present.visor — The visor: its tint, afterglow and rounded frame
+
+- status: crossed 2026-11-17
+- deps: present.draw-section
+- evidence: `Game_FrameLoop` calls `ScreenEffect_Draw` (0x8008F940) after the VSync and before `Game_Draw`. It calls
+  the draw of entry `g_ScreenEffect` (0x800FE900, u32 index) of `g_ScreenEffectTable` (0x800DF250, 0x18-byte entries:
+  enabled, three handlers, 0, colour). Entry 2, the visor held on R2, draws through `Visor_Draw` (0x80090214, third
+  word), which links everything into slot `g_ScreenEffect`+8 of `g_DrawTable` (scratchpad 0x1F800068, the table
+  `Camera_DrawLists` set, `g_DrawTableLength` at 0x1F800066). Packets come from the `g_PacketCursor` (0x1F80006C)
+  pool when they fit under `g_PacketEnd` (0x1F800070). In walk order:
+  - the frame: when 0x1B80 bytes fit, 176 rows (32..207), each a LINE_G2 from (0, y) and one from (512, y), white to
+    black, subtractive (an E1 0x240 packet linked after them sets abr 2), ending 0x38 - c and 0x1C8 + c, where c is
+    `g_VisorFrameCurve` (0x800DF364, one byte a row the first draw builds with SquareRoot0: 0x28 in the middle, less
+    toward the corners). Twenty bytes a line, end to end from the cursor, left first;
+  - the tint: 2 x 88 one-row SPRTs (0x66), 256 wide at x 0 and 256, on even rows, at 15 bits from the other display
+    buffer's same row (E1 page y by gp+0xCB8 ^ 1), modulated by a wavy green from the sine table;
+  - a subtractive 512 x 176 TILE (0x62) of `g_ScreenEffect`+0x10 (0x080808) over rows 32..207;
+  - two black 512 x 32 TILEs (0x60) at rows 0 and 208.
+- where: psx-c12 `game/render/visor_frame.*`; psxport `record_rasterizer` (a 15-bit read of a displayed buffer)
+- notes: Visor-off (entry 1, 0x8008FAD4) draws a 0xA0A0A0 effect, not read yet.

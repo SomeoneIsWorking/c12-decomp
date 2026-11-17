@@ -109,3 +109,14 @@ g_GameMode = 0x800F1B4C;
 g_DrawTasks = 0x800F154C;
 g_ObjectListEnd = 0x800F10FC;
 g_ObjectList = 0x800F1100;
+
+// Screen effects: the visor (docs/re-frontier.md present.visor)
+ScreenEffect_Draw = 0x8008F940; // type:func
+Visor_Draw = 0x80090214; // type:func
+g_ScreenEffectTable = 0x800DF250;
+g_VisorFrameCurve = 0x800DF364;
+g_ScreenEffect = 0x800FE900;
+g_DrawTableLength = 0x1F800066;
+g_DrawTable = 0x1F800068;
+g_PacketCursor = 0x1F80006C;
+g_PacketEnd = 0x1F800070;
