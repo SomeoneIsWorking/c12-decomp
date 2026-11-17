@@ -19,6 +19,26 @@ CD_lastmode = 0x800EEED4;
 
 // Frame loop and loading
 Game_FrameLoop = 0x80038094; // type:func
+Game_Main = 0x8004B1F8; // type:func
+Game_Init = 0x8004B228; // type:func
+Scene_Loop = 0x8003736C; // type:func
+Mission_Load = 0x8003777C; // type:func
+Mission_Unload = 0x80037EF8; // type:func
+Section_Start = 0x8003798C; // type:func
+Section_End = 0x80037BFC; // type:func
+Section_Load = 0x8005D97C; // type:func
+Mission_Advance = 0x800857A4; // type:func
+LoadPage_Begin = 0x8001068C; // type:func
+LoadPage_Load = 0x800107FC; // type:func
+LoadPage_End = 0x80010968; // type:func
+LoadPage_Init = 0x80010CD4; // type:func
+g_LevelTable = 0x800D1F78;
+g_PressedButtons = 0x800F0664;
+g_MissionIndex = 0x800F1520;
+g_LoadedMission = 0x800F1524;
+g_MissionSection = 0x800F1528;
+g_SceneState = 0x800F1B40;
+g_LeaveRequest = 0x800F1B44;
 Module_OpenGtLvb = 0x80059108; // type:func
 Cd_CommandStatusCallback = 0x80057F7C; // type:func
 Cd_Load = 0x800ABCE4; // type:func
